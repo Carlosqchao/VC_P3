@@ -29,18 +29,6 @@ Se implementó un flujo de trabajo completo para la clasificación de microplás
 - Evaluar la precisión del modelo mediante métricas estadísticas.  
 - Visualizar y analizar los resultados con la matriz de confusión.  
 
----
-
-## TAREA 3: Implementación del Sistema Completo SMACC  
-
-### Descripción  
-Se integraron los módulos de extracción de características, entrenamiento y evaluación en un único sistema automatizado. El programa permite cargar imágenes, extraer las regiones definidas por coordenadas en los archivos CSV, entrenar un modelo y mostrar los resultados finales de la clasificación. La estructura del código sigue un enfoque modular con funciones separadas para lectura de datos, procesamiento de imágenes, entrenamiento y visualización de resultados.  
-
-### Objetivos de aprendizaje  
-- Integrar todos los componentes del flujo de análisis en un sistema unificado.  
-- Aplicar buenas prácticas de programación modular en proyectos de visión por computador.  
-- Automatizar procesos de entrenamiento y evaluación de modelos.  
-- Documentar y estructurar adecuadamente un proyecto científico en Python.  
 
 ---
 
