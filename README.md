@@ -41,3 +41,32 @@ Se integraron los módulos de extracción de características, entrenamiento y e
 - Aplicar buenas prácticas de programación modular en proyectos de visión por computador.  
 - Automatizar procesos de entrenamiento y evaluación de modelos.  
 - Documentar y estructurar adecuadamente un proyecto científico en Python.  
+
+---
+
+## Webgrafía  
+
+- OpenCV Documentation: [https://docs.opencv.org/](https://docs.opencv.org/)  
+- Scikit-learn Documentation: [https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)  
+- NumPy Documentation: [https://numpy.org/doc/](https://numpy.org/doc/)  
+- Matplotlib Documentation: [https://matplotlib.org/stable/contents.html](https://matplotlib.org/stable/contents.html)  
+- Random Forest Classifier (Scikit-learn): [https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)  
+- Pandas Documentation: [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)  
+
+---
+
+## Consultas realizadas  
+
+Durante el desarrollo del proyecto, se realizaron diversas consultas a asistentes de inteligencia artificial para resolver dudas relacionadas con el procesamiento de imágenes, la organización del código y la interpretación de métricas:
+
+- **ChatGPT**:  
+  - Asistencia en la redacción del código de extracción de características con OpenCV y NumPy.  
+  - Corrección y explicación de métricas de evaluación de modelos.  
+  - Orientación en la organización modular del código y estructura de carpetas.  
+
+- **Claude (Anthropic)**:  
+  - Revisión conceptual sobre la selección de características relevantes para clasificación de microplásticos.  
+  - Sugerencias sobre optimización del flujo de preprocesamiento y normalización de datos.  
+  - Asesoramiento en el uso de pipelines de Scikit-learn para integración de modelos.  
+
+---
