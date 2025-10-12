@@ -7,7 +7,7 @@ Carlos Ruano Ramos
 ## TAREA 1: Clasificación de Monedas con Análisis de Componentes  
 
 ### Descripción  
-Se desarrolló un programa para clasificar diferentes tipos de monedas mediante la extracción de características simples basadas en color. A partir de una imagen con regiones definidas en un archivo CSV, se recortaron las áreas de interés y se calcularon los valores medios de color (RGB) de cada región. Posteriormente, se entrenó un modelo de clasificación con Random Forest y se evaluó su rendimiento con métricas de precisión, recall, F1-score y una matriz de confusión.  
+Se desarrolló un programa para clasificar diferentes tipos de monedas mediante la extracción de características simples basadas en color y en tamaño. A partir de una imagen con regiones definidas en un archivo CSV, se recortaron las áreas de interés y se calcularon los valores medios de color (RGB) de cada región. Mediante medias de los tamaños de las monedas se discernieron unas de otras y para finalizar la clasificacion se comprueba mediante color.
 
 ### Objetivos de aprendizaje  
 - Comprender el proceso de extracción de características a partir de imágenes.  
