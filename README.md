@@ -123,6 +123,7 @@ Desarrollar un sistema automático de clasificación de partículas de microplá
 - [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)  
 - [Random Forest Classifier (Scikit-learn)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)  
 - [Pandas Documentation](https://pandas.pydata.org/docs/)
+- Diversas consultas a ChatGPT y Claude
 
 ---
 
