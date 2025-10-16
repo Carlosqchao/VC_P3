@@ -1,60 +1,132 @@
-# Autores  
-Juan Boissier García  
-Carlos Ruano Ramos  
+# Proyecto de Clasificación de Monedas y Microplásticos
+
+## Descripción General
+
+Este proyecto aborda dos tareas principales de clasificación en imágenes:  
+
+1. **Clasificación de Monedas:** Identificación del valor de distintas monedas en imágenes, utilizando características de color y tamaño.  
+2. **Clasificación de Microplásticos (SMACC):** Segmentación y clasificación automática de partículas de microplásticos en imágenes, mediante características geométricas y modelos de machine learning.
+
+Ambas tareas combinan técnicas de procesamiento de imágenes con modelos de clasificación supervisada, visualización de resultados y análisis cuantitativo mediante métricas de rendimiento.
 
 ---
 
-## TAREA 1: Clasificación de Monedas con Análisis de Componentes  
+## TAREA 1: Clasificación de Monedas
 
-### Descripción  
-Se desarrolló un programa para clasificar diferentes tipos de monedas mediante la extracción de características simples basadas en color y en tamaño. A partir de una imagen con regiones definidas en un archivo CSV, se recortaron las áreas de interés y se calcularon los valores medios de color (RGB) de cada región. Mediante medias de los tamaños de las monedas se discernieron unas de otras y para finalizar la clasificacion se comprueba mediante color.
+### Objetivo
 
-### Objetivos de aprendizaje  
-- Comprender el proceso de extracción de características a partir de imágenes.  
-- Aplicar el modelo Random Forest para clasificación supervisada.  
-- Evaluar el rendimiento del modelo con métricas cuantitativas.  
-- Representar gráficamente los resultados con Matplotlib.  
+Identificar y contabilizar el valor total de las monedas presentes en una imagen, mediante:  
+
+- Detección de monedas mediante transformada de Hough.  
+- Escalado de radios de las monedas respecto a una moneda de referencia (1€).  
+- Clasificación basada en color medio y tamaño real de las monedas.
+
+### Flujo de Trabajo
+
+1. **Carga y preprocesamiento de la imagen:**  
+   - Se carga la imagen en OpenCV (`cv2.imread`) y se convierte a RGB para visualización con Matplotlib.  
+   - Se obtiene una versión en escala de grises y se aplica un filtro `medianBlur` para reducir ruido.
+
+2. **Detección de monedas:**  
+   - Uso de `cv2.HoughCircles` para detectar círculos que correspondan a monedas.  
+   - Almacenamiento de centros y radios detectados en píxeles.
+
+3. **Selección de moneda de referencia:**  
+   - El usuario selecciona interactivamente una moneda de 1€, para poder establecer la correspondencia píxel ↔ mm.  
+   - Se calcula el radio en mm de todas las monedas usando esta referencia.
+<img width="373" height="482" alt="moneda seleccionada" src="https://github.com/user-attachments/assets/ec899712-72dc-4758-bf2d-f54b02e5688a" />
+Así se observa una vez se elige la moneda de un euro
+
+4. **Clasificación de monedas:**  
+   - Extracción del color medio (RGB) de cada moneda mediante máscaras.  
+   - Clasificación simple por color (`Cobre`, `Amarillo`, `Otro`) para distinguir entre monedas de distintos materiales y valores.  
+   - Comparación de radios ajustados con radios reales de monedas, para determinar el valor más probable.  
+   - Uso del color como ayuda para resolver ambigüedades.
+
+5. **Visualización:**  
+   - Se dibujan círculos sobre cada moneda y se muestra el valor estimado.  
+   - Se calcula el valor total de la imagen y se muestra en la figura.
+
+<img width="286" height="411" alt="image" src="https://github.com/user-attachments/assets/cd03706d-914c-43e7-9a62-43d58b8400f6" />
+Este es el resultado final.
+
+
+### Resultados
+
+- El sistema permite contabilizar automáticamente el total de dinero en la imagen.  
+- Funciona correctamente con monedas bien separadas y sin solapamientos excesivos.  
+- Limitaciones:  
+  - Detección más complicada si las monedas se superponen.  
+  - Clasificación por color sensible a iluminación.
+
+---
+
+## TAREA 2: Clasificación de Microplásticos (SMACC)
+
+### Objetivo
+
+Desarrollar un sistema automático de clasificación de partículas de microplásticos en imágenes, usando características geométricas y machine learning.  
+
+### Flujo de Trabajo
+
+1. **Carga de imágenes y anotaciones:**  
+   - Las imágenes de entrenamiento y test se cargan junto con sus regiones anotadas (bounding boxes) o archivos CSV.  
+
+2. **Segmentación y extracción de características:**  
+   - Cada partícula se segmenta automáticamente mediante umbralización (`cv2.threshold`) y contornos (`cv2.findContours`).  
+   - Se calculan características geométricas de cada partícula:  
+     - Área y perímetro  
+     - Compacidad: `(perímetro^2)/área`  
+     - Área relativa al bounding box  
+     - Relación de aspecto del bounding box  
+     - Ejes de la elipse ajustada  
+     - Centroide y relación entre distancias mínimas y máximas al contorno
+
+3. **Preparación de datos y entrenamiento:**  
+   - Se construye un dataset de características con etiquetas correspondientes.  
+   - Se normalizan los datos usando `StandardScaler`.  
+   - Se entrena un modelo `RandomForestClassifier` con 200 árboles.  
+
+4. **Evaluación en test:**  
+   - Se extraen las mismas características de las partículas en las imágenes de test.  
+   - Se predicen sus clases y se calculan métricas de rendimiento:  
+     - Matriz de confusión  
+     - Precisión, recall y F1-score  
+
+5. **Visualización:**  
+   - Se muestran las partículas detectadas en la imagen de test con bounding boxes coloreadas según la predicción.  
+   - Se genera la matriz de confusión con conteo de aciertos y errores por clase.
+
+### Resultados
+
+- El modelo alcanzó una **precisión global del 82%** en el conjunto de test.  
+- Buen desempeño en la clase `FRA` (fragmentos) con recall de 100%.  
+- Las clases `PEL` y `TAR` presentan más confusiones entre sí, debido a similitudes en forma y tamaño.  
+- Las visualizaciones permiten verificar el comportamiento del modelo en cada partícula individual.
 
 ---
 
-## TAREA 2: Clasificación de Microplásticos con SMACC  
+## Conclusiones y Lecciones Aprendidas
 
-### Descripción  
-Se implementó un flujo de trabajo completo para la clasificación de microplásticos (SMACC), utilizando imágenes con regiones anotadas. Se extrajeron características de cada partícula, incluyendo color medio (RGB) y, opcionalmente, características geométricas como área, perímetro y compacidad. Los datos se normalizaron y se entrenó un modelo de clasificación utilizando un pipeline con StandardScaler y RandomForestClassifier. Finalmente, se calcularon las métricas de rendimiento y se generó una matriz de confusión para analizar los resultados.  
-
-### Objetivos de aprendizaje  
-- Comprender el proceso de segmentación y extracción de características en imágenes.  
-- Aplicar modelos de machine learning para clasificación de objetos.  
-- Analizar características geométricas y de color en partículas microscópicas.  
-- Evaluar la precisión del modelo mediante métricas estadísticas.  
-- Visualizar y analizar los resultados con la matriz de confusión.  
-
+- La combinación de características geométricas y color es efectiva para clasificaciones simples de objetos circulares como monedas.  
+- En el caso de microplásticos, las características geométricas permiten una discriminación razonable, aunque partículas solapadas o de tamaño similar entre clases pueden generar confusiones.  
+- El uso de modelos de ensamble como Random Forest proporciona robustez frente a variaciones en las partículas.  
+- La visualización y análisis de la matriz de confusión es clave para entender los errores del modelo y planificar mejoras.
 
 ---
 
-## Webgrafía  
+## Webgrafía y Recursos
 
-- OpenCV Documentation: [https://docs.opencv.org/](https://docs.opencv.org/)  
-- Scikit-learn Documentation: [https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)  
-- NumPy Documentation: [https://numpy.org/doc/](https://numpy.org/doc/)  
-- Matplotlib Documentation: [https://matplotlib.org/stable/contents.html](https://matplotlib.org/stable/contents.html)  
-- Random Forest Classifier (Scikit-learn): [https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)  
-- Pandas Documentation: [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)  
-
----
-
-## Consultas realizadas  
-
-Durante el desarrollo del proyecto, se realizaron diversas consultas a asistentes de inteligencia artificial para resolver dudas relacionadas con el procesamiento de imágenes, la organización del código y la interpretación de métricas:
-
-- **ChatGPT**:  
-  - Asistencia en la redacción del código de extracción de características con OpenCV y NumPy.  
-  - Corrección y explicación de métricas de evaluación de modelos.  
-  - Orientación en la organización modular del código y estructura de carpetas.  
-
-- **Claude (Anthropic)**:  
-  - Revisión conceptual sobre la selección de características relevantes para clasificación de microplásticos.  
-  - Sugerencias sobre optimización del flujo de preprocesamiento y normalización de datos.  
-  - Asesoramiento en el uso de pipelines de Scikit-learn para integración de modelos.  
+- [OpenCV Documentation](https://docs.opencv.org/)  
+- [Scikit-learn Documentation](https://scikit-learn.org/stable/)  
+- [NumPy Documentation](https://numpy.org/doc/)  
+- [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)  
+- [Random Forest Classifier (Scikit-learn)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)  
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
 
 ---
+
+## Autores
+
+- Juan Boissier García  
+- Carlos Ruano Ramos  
