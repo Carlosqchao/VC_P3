@@ -34,6 +34,8 @@ Identificar y contabilizar el valor total de las monedas presentes en una imagen
 3. **Selección de moneda de referencia:**  
    - El usuario selecciona interactivamente una moneda de 1€, para poder establecer la correspondencia píxel ↔ mm.  
    - Se calcula el radio en mm de todas las monedas usando esta referencia.
+<img width="373" height="482" alt="moneda seleccionada" src="https://github.com/user-attachments/assets/ec899712-72dc-4758-bf2d-f54b02e5688a" />
+Así se observa una vez se elige la moneda de un euro
 
 4. **Clasificación de monedas:**  
    - Extracción del color medio (RGB) de cada moneda mediante máscaras.  
@@ -44,6 +46,10 @@ Identificar y contabilizar el valor total de las monedas presentes en una imagen
 5. **Visualización:**  
    - Se dibujan círculos sobre cada moneda y se muestra el valor estimado.  
    - Se calcula el valor total de la imagen y se muestra en la figura.
+
+<img width="286" height="411" alt="image" src="https://github.com/user-attachments/assets/cd03706d-914c-43e7-9a62-43d58b8400f6" />
+Este es el resultado final.
+
 
 ### Resultados
 
