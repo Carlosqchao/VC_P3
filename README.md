@@ -99,6 +99,10 @@ Desarrollar un sistema automático de clasificación de partículas de microplá
 
 ### Resultados
 
+<img width="605" height="519" alt="image" src="https://github.com/user-attachments/assets/69a32609-a870-433f-80cf-05b6ef33ae4f" />
+<img width="564" height="515" alt="image" src="https://github.com/user-attachments/assets/959005e0-b7ee-4cb9-860f-f6d3ddfa9bed" />
+
+
 - El modelo alcanzó una **precisión global del 82%** en el conjunto de test.  
 - Buen desempeño en la clase `FRA` (fragmentos) con recall de 100%.  
 - Las clases `PEL` y `TAR` presentan más confusiones entre sí, debido a similitudes en forma y tamaño.  
